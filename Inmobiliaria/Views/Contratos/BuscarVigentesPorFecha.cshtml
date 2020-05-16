@@ -1,0 +1,75 @@
+﻿@model IEnumerable<Inmobiliaria.Models.Contrato>
+
+@{
+    ViewData["Title"] = "BuscarVigentesPorFecha";
+}
+
+<h1>Buscar Vigentes Por Fecha</h1>
+
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="BuscarVigentesPorFecha">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label class="control-label">Fecha Alta</label>
+                <input type="date" name="fechaAlta" class="form-control" />
+                <label class="control-label">Fecha Baja</label>
+                <input type="date" name="fechaBaja" class="form-control" />
+
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="buscar" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+<table class="table">
+    <thead>
+        <tr>
+           
+            <th>
+               Fecha Alta
+            </th>
+            <th>
+               Fecha Baja
+            </th>
+            <th>
+               Garante
+            </th>
+            <th>
+               Inquilino
+            </th>
+            <th>
+                Inmueble precio
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+           
+            <td>
+                @Html.DisplayFor(modelItem => item.FechaAlta)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FechaBaja)
+            </td>
+            <td>
+                
+                @(item.garante.Nombre+" "+ item.garante.Apellido)
+            </td>
+            <td>
+                
+                @(item.inquilino.Nombre+" "+ item.inquilino.Apellido)
+            </td>
+            <td>
+                
+                @(item.inmueble.Precio)
+            </td>
+           
+        </tr>
+}
+    </tbody>
+</table>

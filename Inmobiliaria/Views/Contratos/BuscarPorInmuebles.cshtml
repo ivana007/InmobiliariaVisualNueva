@@ -1,0 +1,80 @@
+﻿@model IEnumerable<Inmobiliaria.Models.Contrato>
+
+    @{
+        ViewData["Title"] = "BuscarPorInmuebles";
+    }
+
+    <h1>BuscarPorInmuebles</h1>
+
+    <div class="row">
+        <div class="col-md-4">
+            <form asp-action="BuscarPorInmuebles">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label class="control-label">Inmueble</label>
+                    <select class="form-control" name="IdInmueble">
+                        @foreach (var item in (IList<Inmueble>)ViewBag.Inmuebles)
+                        {
+                            <option value="@item.IdInmueble">@(item.Direccion + " " + item.TipoInmueble)</option>
+                        }
+                    </select>
+
+
+                </div>
+
+                <div class="form-group">
+                    <input type="submit" value="buscar" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
+    </div>
+    <div>
+        @ViewBag.Cartel
+    </div>
+    <table class="table">
+        <thead>
+            <tr>
+                
+                <th>
+                    Fecha Alta
+                </th>
+                <th>
+                    Fecha Baja
+                </th>
+                <th>
+                    Garante
+                </th>
+                <th>
+                    Inquilino
+                </th>
+                <th>
+                    Inmueble Precio
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FechaAlta)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FechaBaja)
+                    </td>
+                    <td>
+                        @(item.garante.Nombre+" "+ item.garante.Apellido)
+                    </td>
+                    <td>
+                        @(item.inquilino.Nombre+" "+ item.inquilino.Apellido)
+                    </td>
+                    <td>
+                        @(item.inmueble.Precio)
+                    </td>
+                   
+                </tr>
+            }
+        </tbody>
+    </table>
