@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using Inmobiliaria.Models;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -11,7 +12,7 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-
+using Microsoft.EntityFrameworkCore;
 namespace Inmobiliaria
 {
     public class Startup
@@ -50,6 +51,10 @@ namespace Inmobiliaria
                 } 
             );
             services.AddMvc().SetCompatibilityVersion(Microsoft.AspNetCore.Mvc.CompatibilityVersion.Version_3_0);
+
+            services.AddDbContext<DataContext>(
+                options => options.UseSqlServer(configuration["ConnectionStrings:DefaultConnection"])
+                );
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
