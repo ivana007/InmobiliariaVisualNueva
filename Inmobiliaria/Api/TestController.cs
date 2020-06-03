@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Inmobiliaria.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -11,18 +12,23 @@ namespace Inmobiliaria.Api
     [ApiController]
     public class TestController : ControllerBase
     {
+        private readonly DataContext context;
+        public TestController(DataContext context) {//para empezar a usarlo 
+            this.context = context;
+        }
+
         // GET: api/Test
         [HttpGet]
         public IEnumerable<string> Get()
         {
             return new string[] { "value1", "value2" };
         }
-
-        // GET: api/Test/5
+                
+           // GET: api/Test/5
         [HttpGet("{id}", Name = "Get")]
         public string Get(int id)
         {
-            return "value";
+            return "value"+id;
         }
 
         // POST: api/Test

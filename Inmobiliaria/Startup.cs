@@ -13,6 +13,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
+
 namespace Inmobiliaria
 {
     public class Startup
@@ -34,7 +36,20 @@ namespace Inmobiliaria
                     options.LoginPath = "/Usuarios/Login";//Usuarios/Login   asi esta en diapo con Usuarios
                     options.LogoutPath = "/Usuarios/Logout";//Usuarios/Logout
                     options.AccessDeniedPath = "/Home/Restringido";
-                });
+                })
+            .AddJwtBearer(options =>//la api web valida con token
+             {
+                 options.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
+                 {
+                     ValidateIssuer = true,
+                     ValidateAudience = true,
+                     ValidateLifetime = true,
+                     ValidateIssuerSigningKey = true,
+                     ValidIssuer = configuration["TokenAuthentication:Issuer"],
+                     ValidAudience = configuration["TokenAuthentication:Audience"],
+                     IssuerSigningKey = new SymmetricSecurityKey(System.Text.Encoding.ASCII.GetBytes(configuration["TokenAuthentication:SecretKey"])),
+                 };
+             });
             // services.AddControllersWithViews();
 
             services.Configure<CookiePolicyOptions>(options =>
