@@ -34,9 +34,18 @@ namespace Inmobiliaria.Api
 
         // GET: api/Propietarios
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Propietario>>> Get()//me devuelve la lista de propietraios
+        //[AllowAnonymous]
+        public async Task<IActionResult> Get()
         {
-            return Ok(contexto.Propietarios);
+            try
+            {
+                var usuario = User.Identity.Name;
+                return Ok(contexto.Propietarios.SingleOrDefault(x => x.Mail == usuario));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex);
+            }
         }
 
 
@@ -64,7 +73,7 @@ namespace Inmobiliaria.Api
 
         // POST: api/Propietarios
         [HttpPost("login")]
-       // [AllowAnonymous]
+       [AllowAnonymous]
         public async Task<IActionResult> Login(LoginView loginView)
         {
             try
@@ -76,13 +85,15 @@ namespace Inmobiliaria.Api
                     prf: KeyDerivationPrf.HMACSHA1,
                     iterationCount: 1000,
                     numBytesRequested: 256 / 8));
-                var p = contexto.Propietarios.FirstOrDefault(x => x.Mail == loginView.Mail);
-                if (p == null || p.Mail !=null)
+                var u = contexto.Usuarios.FirstOrDefault(x => x.Mail == loginView.Mail);
+                //var u = contexto.Usuarios.FirstOrDefault(x => x.Clave == loginView.Clave);// el propietario ahora es un usuario
+                if (u == null || u.Clave != hashed)
                 {
                     return BadRequest("Nombre de usuario o clave incorrecta");
                 }
                 else
                 {
+                    var p = contexto.Propietarios.FirstOrDefault(x => x.Mail == u.Mail);
                     var key = new SymmetricSecurityKey(System.Text.Encoding.ASCII.GetBytes(config["TokenAuthentication:SecretKey"]));
                     var credenciales = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
                     var claims = new List<Claim>
@@ -110,8 +121,23 @@ namespace Inmobiliaria.Api
 
         // PUT: api/Propietarios/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public async Task<IActionResult> Put(Propietario propietario)
         {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    //propietario.IdPropietario = id;
+                    contexto.Propietarios.Update(propietario);
+                    contexto.SaveChanges();
+                    return Ok(propietario);
+                }
+                return BadRequest();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex);
+            }
         }
 
         // DELETE: api/ApiWithActions/5

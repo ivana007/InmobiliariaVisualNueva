@@ -12,19 +12,19 @@ namespace Inmobiliaria.Api
     [ApiController]
     public class TestController : ControllerBase
     {
-        private readonly DataContext context;
+        private readonly DataContext contexto;
         public TestController(DataContext context) {//para empezar a usarlo 
-            this.context = context;
+            this.contexto = context;
         }
 
         // GET: api/Test
         [HttpGet]
-        public IEnumerable<string> Get()
+        public async Task<ActionResult<IEnumerable<Propietario>>> Get()//me devuelve la lista de propietraios
         {
-            return new string[] { "value1", "value2" };
+            return Ok(contexto.Propietarios);
         }
-                
-           // GET: api/Test/5
+
+        // GET: api/Test/5
         [HttpGet("{id}", Name = "Get")]
         public string Get(int id)
         {

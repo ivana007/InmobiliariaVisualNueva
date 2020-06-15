@@ -525,3 +525,12 @@ C:\Users\Ivana\Source\Repos\InmobiliariaVisualNueva\Inmobiliaria\bin\Debug\netco
 C:\Users\Ivana\Source\Repos\InmobiliariaVisualNueva\Inmobiliaria\bin\Debug\netcoreapp3.1\runtimes\win-arm64\native\e_sqlite3.dll
 C:\Users\Ivana\Source\Repos\InmobiliariaVisualNueva\Inmobiliaria\bin\Debug\netcoreapp3.1\runtimes\win-x64\native\e_sqlite3.dll
 C:\Users\Ivana\Source\Repos\InmobiliariaVisualNueva\Inmobiliaria\bin\Debug\netcoreapp3.1\runtimes\win-x86\native\e_sqlite3.dll
+C:\Users\Ivana\Source\Repos\InmobiliariaVisualNueva\Inmobiliaria\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+C:\Users\Ivana\Source\Repos\InmobiliariaVisualNueva\Inmobiliaria\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.JsonWebTokens.dll
+C:\Users\Ivana\Source\Repos\InmobiliariaVisualNueva\Inmobiliaria\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.Logging.dll
+C:\Users\Ivana\Source\Repos\InmobiliariaVisualNueva\Inmobiliaria\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.Protocols.dll
+C:\Users\Ivana\Source\Repos\InmobiliariaVisualNueva\Inmobiliaria\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+C:\Users\Ivana\Source\Repos\InmobiliariaVisualNueva\Inmobiliaria\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.Tokens.dll
+C:\Users\Ivana\Source\Repos\InmobiliariaVisualNueva\Inmobiliaria\bin\Debug\netcoreapp3.1\System.IdentityModel.Tokens.Jwt.dll
+C:\Users\Ivana\Source\Repos\InmobiliariaVisualNueva\Inmobiliaria\obj\Debug\netcoreapp3.1\Inmobiliaria.csproj.CoreCompileInputs.cache
+C:\Users\Ivana\Source\Repos\InmobiliariaVisualNueva\Inmobiliaria\obj\Debug\netcoreapp3.1\Inmobiliaria.MvcApplicationPartsAssemblyInfo.cache
