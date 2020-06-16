@@ -54,7 +54,7 @@ namespace Inmobiliaria.Api
         }
 
         // POST: api/Inmuebles
-        [HttpPost]
+        [HttpPost()]
         public async Task<IActionResult> Post(Inmueble entidad)
         {
             try
@@ -66,7 +66,8 @@ namespace Inmobiliaria.Api
                     //entidad.IdPropietario = 10;
                     contexto.Inmuebles.Add(entidad);
                     contexto.SaveChanges();
-                    return CreatedAtAction(nameof(Get), new { id = entidad.IdPropietario }, entidad);
+                    /// return CreatedAtAction(nameof(Get), new { id = entidad.IdPropietario }, entidad);
+                    return Ok(entidad);
                 }
                 return BadRequest();
             }
@@ -101,12 +102,12 @@ namespace Inmobiliaria.Api
 
         // DELETE: api/Inmuebles/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> Delete(Inmueble entidad)
+        public async Task<IActionResult> Delete(int id)
         {
             try
             {
-                //var entidad = contexto.Inmuebles.Include(x => x.Propietario).FirstOrDefault(x => x.IdInmueble == id && x.Propietario.Mail == User.Identity.Name);
-                if (ModelState.IsValid && contexto.Inmuebles.AsNoTracking().Include(x => x.Propietario).FirstOrDefault(x => x.Propietario.Mail == User.Identity.Name) != null)
+                var entidad = contexto.Inmuebles.Include(x => x.Propietario).FirstOrDefault(x => x.IdInmueble == id && x.Propietario.Mail == User.Identity.Name);
+                if (ModelState.IsValid)
                 
                 {
                    
